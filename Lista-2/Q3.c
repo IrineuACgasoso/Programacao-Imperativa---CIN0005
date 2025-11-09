@@ -3,22 +3,25 @@
 #include <string.h>
 
 int main() {
-    int numero_strings = 1;
+    int numero_strings = 0;
 
-    char** lista_strings = (char**) malloc(numero_strings * sizeof(char*));
+    // Inicializa com NULL
+    char** lista_strings = NULL; 
 
-    //Se o ponteiro não for nulo
-    if (lista_strings != NULL)
+    int memoria_em_alocacao = 1;
+
+    while (memoria_em_alocacao)
     {
-        while (1)
-        {
         //Cria um array temp para avaliar a entrada
         char temp_array[1000];
 
+        char* nova_string = NULL;
+
         //Termina a leitura caso o buffer lote
-        if (fgets(temp_array, 1000, stdin))
+        if (fgets(temp_array, 1000, stdin) == NULL)
         {
-            return 0;
+            memoria_em_alocacao = 0;
+            continue;
         }
 
         //Retira os bits nao utilizados
@@ -28,22 +31,46 @@ int main() {
         size_t tamanho_string = strlen(temp_array);
 
         //Cria o espaço para armazenar a string
-        char* nova_string = (char*) malloc((tamanho_string + 1) * sizeof(char));
+        nova_string = (char*) malloc((tamanho_string + 1) * sizeof(char));
 
         //Copia o temp para a string 
         strcpy(nova_string, temp_array);
 
-        
+        //Aumenta o n° de strings
+        numero_strings++;
+
+        //Cria um ptr temporario para tentar alocar a prox string
+        char **temp_ptr = (char**)realloc(lista_strings, numero_strings * sizeof(char*));
+
+        if (temp_ptr == NULL)
+        {
+            //Libera o ponteiro atual
+            free(nova_string);
+            memoria_em_alocacao = 0;
+            continue;
         }
         
+        //Atualiza o ptr duplo, agora expandido
+        lista_strings = temp_ptr;
+
+        //Adiciona o ponteiro da string para o ponteiro principal
+        lista_strings[numero_strings - 1] = nova_string;
     }
+
+    //Dá free caso haja algum erro de alocacao
+    if (lista_strings != NULL)
+    {
+        for (int i = 0; i < numero_strings; i++)
+        {
+            free(lista_strings[i]);
+        }
+        free(lista_strings);
+    }
+
     //Caso não consiga alocar
     else
     {
         printf("Falha na alocação.");
     }
-    
-
-
     return 0;
 }

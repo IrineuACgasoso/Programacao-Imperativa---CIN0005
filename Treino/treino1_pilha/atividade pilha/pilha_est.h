@@ -8,6 +8,10 @@ typedef struct pilha_est
     int top;
 } Stack;
 
+void iniciar(Stack* pilha) {
+    pilha->top = -1;
+}
+
 void push(Stack* pilha, int numero) {
     if (cheia(pilha))
         {
@@ -16,17 +20,18 @@ void push(Stack* pilha, int numero) {
         }
     pilha->top++;
     pilha->itens[pilha->top] = numero;
-    printf("Valor adicionado: %d", numero);
+    printf("Valor adicionado: %d\n", numero);
 }
 
-void pop(Stack* pilha) {
+int pop(Stack* pilha) {
     if (vazia(pilha))
     {
         printf("Pilha vazia!\n");
-        return;
+        return 1;
     }
     printf("Valor retirado: %d\n", pilha->itens[pilha->top]);
     pilha->top--;
+    return pilha->itens[pilha->top];
 }
 
 int cheia(Stack* pilha) {

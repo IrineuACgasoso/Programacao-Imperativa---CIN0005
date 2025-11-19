@@ -2,7 +2,7 @@
 
 int main() {
     Stack pilha;
-    pilha.top = -1;
+    iniciar(&pilha);
     int numero;
     while (scanf("%d ", &numero) == 1)
     {

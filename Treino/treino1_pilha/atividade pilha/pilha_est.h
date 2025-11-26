@@ -12,6 +12,23 @@ void iniciar(Stack* pilha) {
     pilha->top = -1;
 }
 
+int cheia(Stack* pilha) {
+    if (pilha->top == MAX - 1)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int vazia(Stack* pilha) {
+    if (pilha->top == -1)
+    {
+        return 1;
+    }
+    return 0;
+    
+}
+
 void push(Stack* pilha, int numero) {
     if (cheia(pilha))
         {
@@ -34,19 +51,3 @@ int pop(Stack* pilha) {
     return pilha->itens[pilha->top];
 }
 
-int cheia(Stack* pilha) {
-    if (pilha->top == MAX - 1)
-    {
-        return 1;
-    }
-    return 0;
-}
-
-int vazia(Stack* pilha) {
-    if (pilha->top == -1)
-    {
-        return 1;
-    }
-    return 0;
-    
-}

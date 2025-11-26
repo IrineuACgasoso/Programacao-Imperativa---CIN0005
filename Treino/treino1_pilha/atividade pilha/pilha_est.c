@@ -1,13 +1,18 @@
-#include <pilha_est.h>
+#include "pilha_est.h"
 
 int main() {
     Stack pilha;
     iniciar(&pilha);
     int numero;
-    while (scanf("%d ", &numero) == 1)
+    printf("Digite um numero: ");
+    scanf("%d", &numero);
+    printf("\n");
+
+    for (int i = 1; i <= numero; i++)
     {
-        push(&pilha, numero);
+        push(&pilha, i);
     }
+    printf("\n");
 
     while(!vazia(&pilha))
     {

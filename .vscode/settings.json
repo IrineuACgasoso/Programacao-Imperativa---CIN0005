@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "pilha_est.h": "c"
+        "pilha_est.h": "c",
+        "deque": "c",
+        "list": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "ostream": "c"
     }
 }
